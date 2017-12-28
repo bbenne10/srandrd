@@ -67,7 +67,6 @@ main(int argc, char **argv) {
     XEvent ev;
     Display *dpy;
     int daemonize = 1, args = 1, verbose = 0;
-    char buf[2 * BUFFER_SIZE];
     char monBuf[BUFFER_SIZE];
     char actionBuf[BUFFER_SIZE];
     uid_t uid;
