@@ -42,6 +42,7 @@ catch_child(int sig) {
 static void
 catch_hup(int sig) {
   (void)sig;
+
   if (fork() == 0) {
     setsid();
     setenv("SRANDRD_EVT_ACTION", "SIGHUP", False);
@@ -51,7 +52,7 @@ catch_hup(int sig) {
 
 static void
 help(int status) {
-  fprintf(stderr, "Usage: "NAME" [option] command\n\n"
+  fprintf(stderr, "Usage: " NAME " [option] command\n\n"
           "Options:\n"
           "   -h  Print this help and exit\n"
           "   -n  Don't fork to background\n"
@@ -61,11 +62,11 @@ help(int status) {
 
 static void
 version(void) {
-  fprintf(stderr, "    This is : "NAME"\n"
-          "    Version : "VERSION"\n"
-          "  Builddate : "__DATE__" "__TIME__"\n"
-          "  Copyright : "COPYRIGHT"\n"
-          "    License : "LICENSE"\n");
+  fprintf(stderr, "    This is : " NAME "\n"
+          "    Version : " VERSION "\n"
+          "  Builddate : " __DATE__ " " __TIME__ "\n"
+          "  Copyright : " COPYRIGHT "\n"
+          "    License : " LICENSE "\n");
   exit(EXIT_SUCCESS);
 }
 
