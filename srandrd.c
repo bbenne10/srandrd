@@ -85,11 +85,21 @@ main(int argc, char **argv) {
 
   for (args = 1; args < argc && *(argv[args]) == '-'; args++) {
     switch(argv[args][1]) {
-    case 'V' : version();
-    case 'n' : daemonize = 0; break;
-    case 'v' : verbose++; break;
-    case 'h' : help(EXIT_SUCCESS);
-    default  : help(EXIT_FAILURE);
+    case 'V':
+      version();
+      break;
+    case 'n':
+      daemonize = 0;
+      break;
+    case 'v':
+      verbose++;
+      break;
+    case 'h':
+      help(EXIT_SUCCESS);
+      break;
+    default:
+      help(EXIT_FAILURE);
+      break;
     }
   }
 
@@ -158,6 +168,7 @@ main(int argc, char **argv) {
         } else {
           printf("CRTC: %lu\n", info->crtc);
           XRRCrtcInfo *crtc = XRRGetCrtcInfo(dpy, resources, info->crtc);
+
           if (crtc != NULL) {
             printf("Size: %dx%d\n", crtc->width, crtc->height);
             XRRFreeCrtcInfo(crtc);
