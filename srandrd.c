@@ -38,6 +38,7 @@ catch_child(int sig) {
 }
 static void
 catch_hup(int sig) {
+  (void)sig;
   if (fork() == 0) {
     setsid();
     setenv("SRANDRD_EVT_ACTION", "SIGHUP", False);
