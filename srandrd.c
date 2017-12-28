@@ -40,7 +40,6 @@ static void
 catch_hup(int sig) {
   if (fork() == 0) {
     setsid();
-    setenv("SRANDRD_ACTION", "SIGHUP", False);
     setenv("SRANDRD_EVT_ACTION", "SIGHUP", False);
     execvp(global_argv[global_args], &(global_argv[global_args]));
   }
@@ -133,8 +132,6 @@ main(int argc, char **argv) {
                 continue;
             }
 
-            snprintf(buf, 2 * BUFFER_SIZE, "%s %s", info->name,
-                     con_actions[info->connection]);
             snprintf(monBuf, BUFFER_SIZE, "%s", info->name);
             snprintf(actionBuf, BUFFER_SIZE, "%s", con_actions[info->connection]);
 
@@ -158,7 +155,6 @@ main(int argc, char **argv) {
                 if (dpy)
                     close(ConnectionNumber(dpy));
                 setsid();
-                setenv("SRANDRD_ACTION", buf, False);
                 setenv("SRANDRD_EVT_ACTION", actionBuf, False);
                 setenv("SRANDRD_EVT_MON", monBuf, False);
                 execvp(argv[args], &(argv[args]));
