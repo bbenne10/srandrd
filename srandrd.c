@@ -79,8 +79,9 @@ main(int argc, char **argv) {
   char actionBuf[BUFFER_SIZE];
   uid_t uid;
 
-  if (argc < 2)
+  if (argc < 2) {
     help(EXIT_FAILURE);
+  }
 
   for (args = 1; args < argc && *(argv[args]) == '-'; args++) {
     switch(argv[args][1]) {
@@ -92,14 +93,17 @@ main(int argc, char **argv) {
     }
   }
 
-  if (argv[args] == NULL)
+  if (argv[args] == NULL) {
     help(EXIT_FAILURE);
+  }
 
-  if (((uid = getuid()) == 0) || uid != geteuid())
+  if (((uid = getuid()) == 0) || uid != geteuid()) {
     xerror("%s may not run as root\n", NAME);
+  }
 
-  if ((dpy = XOpenDisplay(NULL)) == NULL)
+  if ((dpy = XOpenDisplay(NULL)) == NULL) {
     xerror("Cannot open display\n");
+  }
 
   if (daemonize) {
     switch(fork()) {
@@ -162,8 +166,9 @@ main(int argc, char **argv) {
       }
 
       if (fork() == 0) {
-        if (dpy)
+        if (dpy) {
           close(ConnectionNumber(dpy));
+        }
 
         setsid();
         setenv("SRANDRD_EVT_ACTION", actionBuf, False);
